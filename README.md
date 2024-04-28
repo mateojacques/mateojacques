@@ -8,4 +8,4 @@ I’m currently working as a Fullstack Web Developer, while pursuing a degree in
 **Location**: Buenos Aires, Argentina.
 
 
-My portfolio of work: https://mateojacquesweb.com
+My portfolio of work: https://mateojacques.com
