@@ -1,7 +1,5 @@
 <h1 align="center">I develop User Interfaces.</h1>
 
----
-
 🎯 I'm a Fullstack Web Developer from Argentina with 4 years of experience.  
 I specialize in building responsive, pixel-perfect user interfaces using **React.js**, **Next.js**, and **TypeScript**, with a strong focus on **performance** and **user experience**.
 
@@ -28,10 +26,12 @@ Other      →  Git · GitHub · Postman · Ruby on Rails (exposure)
 
 ## ✨ Featured Projects
 
-| Name       | Description | Stack |
+| Name       | Description | Stack | Demo |
 |------------|-------------|-------|
-| [**DoraTV**](https://github.com/mateojacques/doratv) | A Twitch browser that explores related streams by game or category. | TypeScript, CSS |
-| _More projects coming..._ | Follow me to stay updated! | - |
+| [**Tatzi (building)**](https://github.com/mateojacques/tatzi) | An app which connects tattoo enthusiasts with the best artists available in their zone. | React Native, Typescript | - |
+| [**Plazem**](https://github.com/mateojacques/plazem) | A card game focused on speed, reflexes and quick decision-making. | TypeScript, CSS | plazem.mateojacques.com |
+| [**DoraTV**](https://github.com/mateojacques/doratv) | A Twitch browser that explores related streams by game or category. | TypeScript, CSS | doratv.mateojacques.com |
+| [**Gamefort**](https://github.com/mateojacques/gamefort) | A free-to-play multiplayer games browser. | React, CSS, Bootstrap | gamefort.mateojacques.com |
 
 ---
 
@@ -49,5 +49,3 @@ If you're building something that needs **attention to detail, performance, and 
 
 - 💼 [LinkedIn](https://www.linkedin.com/in/mateoleonjacques/)
 - ✉️ mateoleonjacques@gmail.com
-
----
