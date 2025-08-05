@@ -26,12 +26,12 @@ Other      →  Git · GitHub · Postman · Ruby on Rails (exposure)
 
 ## ✨ Featured Projects
 
-| Name       | Description | Stack | Demo |
-|------------|-------------|-------|
-| [**Tatzi (building)**](https://github.com/mateojacques/tatzi) | An app which connects tattoo enthusiasts with the best artists available in their zone. | React Native, Typescript | - |
-| [**Plazem**](https://github.com/mateojacques/plazem) | A card game focused on speed, reflexes and quick decision-making. | TypeScript, CSS | plazem.mateojacques.com |
-| [**DoraTV**](https://github.com/mateojacques/doratv) | A Twitch browser that explores related streams by game or category. | TypeScript, CSS | doratv.mateojacques.com |
-| [**Gamefort**](https://github.com/mateojacques/gamefort) | A free-to-play multiplayer games browser. | React, CSS, Bootstrap | gamefort.mateojacques.com |
+| Name | Description | Stack | Demo |
+|------|-------------|-------|------|
+| [**Tatzi (building)**](https://github.com/mateojacques/tatzi) | An app which connects tattoo enthusiasts with the best artists available in their zone. | React Native, TypeScript | - |
+| [**Plazem**](https://github.com/mateojacques/plazem) | A card game focused on speed, reflexes and quick decision-making. | TypeScript, CSS | [plazem.mateojacques.com](https://plazem.mateojacques.com) |
+| [**DoraTV**](https://github.com/mateojacques/doratv) | A Twitch browser that explores related streams by game or category. | TypeScript, CSS | [doratv.mateojacques.com](https://doratv.mateojacques.com) |
+| [**Gamefort**](https://github.com/mateojacques/gamefort) | A free-to-play multiplayer games browser. | React, CSS, Bootstrap | [gamefort.mateojacques.com](https://gamefort.mateojacques.com) |
 
 ---
 
