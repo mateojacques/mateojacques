@@ -6,26 +6,29 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Walter+Turncoat&display=swap" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet">
   <script src="main.js"></script>
   <title>Mateo Jacques</title>
 </head>
 
-<body
-  style="height:100svh;width:100svw;display:flex;flex-direction:column;justify-content:center;align-items:center;background-image:url(./bg.png);background-position:center;background-size:cover;overflow:hidden;background-color:rgba(0,0,0,0.6);background-blend-mode:overlay;color:#fbfbfb">
-  <div
-    style="width:100%;max-width:450px;height:fit-content;padding:1.5rem 1rem;background-color:#000000;border:4px solid #fff;font-family:'Walter Turncoat',sans-serif;overflow:auto;scrollbar-width:none;margin:2rem;border-radius:5px">
-    <h1 style="line-height: 0.7rem;">Mateo Jacques.</h1>
-    <h2 style="color:rgba(255,255,255,0.6);font-size:1.1rem;margin-bottom:1.5rem">Software Engineer and Hobby Artist</h2>
+<body>
+  <div id="main-container">
+    <h1>Mateo Jacques.</h1>
+    <h2>Software Engineer and Hobby Artist</h2>
     <p>I don't have time to setup a proper personal website since I'm working hard lately.</p>
     <p>Here's some drawings I made:</p>
 
-    <section id="artworks" style="margin-bottom:2rem">
+    <section id="artworks">
       <article id="currentArtwork" onclick="nextImage();">
-        <img id="currentArtworkImage" src="./assets/art/digital/1.png" alt="" style="width:100%;cursor:pointer">
+        <img id="currentArtworkImage" src="./assets/art/digital/1.png" alt="Current artwork showcased">
       </article>
     </section>
-    <section id="thumbnails" style="display:grid;grid-template-columns: 1fr 1fr 1fr 1fr;">
+    <section id="thumbnails">
 
+    </section>
+
+    <section id="plazem">
+      <iframe src="https://plazem.mateojacques.com" frameborder="0"></iframe>
     </section>
   </div>
 </body>
