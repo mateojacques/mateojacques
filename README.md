@@ -1,1 +1,1 @@
-Software Engineer and Indie Web Developer. https://mateojacques.com
+Software Engineer and Indie Web Developer. https://go10.blog
