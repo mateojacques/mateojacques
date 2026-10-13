@@ -165,3 +165,64 @@ test('post page with no images is under 100 KB including font and character', ()
     largestCharacter;
   assert.ok(total < 100 * 1024, `total ${total} bytes`);
 });
+
+test('post page shows the author with avatar, linked to the about page', () => {
+  const html = renderPost(posts[0]);
+  assert.match(html, /<img class="avatar" src="\/assets\/profile.jpg" width="44" height="44" alt="">/);
+  assert.match(html, /<a class="author" href="\/about\/" rel="author">Mateo Jacques<\/a>/);
+  assert.match(html, /<meta name="author" content="Mateo Jacques">/);
+  assert.match(html, /<meta property="article:published_time" content="2026-10-12">/);
+  assert.match(html, /<meta property="og:image" content="https:\/\/go10.dev\/assets\/profile.jpg">/);
+  assert.ok(fs.existsSync(path.join(staticDir, 'assets', 'profile.jpg')));
+});
+
+test('home rows name the author', () => {
+  const html = renderHome(posts);
+  assert.equal(html.match(/· Mateo Jacques<\/p>/g).length, posts.length);
+});
+
+test('an unknown author fails loudly', () => {
+  assert.throws(() => renderPost({ ...posts[0], author: 'nobody' }), /Unknown author "nobody"/);
+});
+
+test('post page offers share links with the canonical url, encoded and safe', () => {
+  const html = renderPost(nasty);
+  const share = /<section class="share"[\s\S]*?<\/section>/.exec(html)[0];
+  const url = encodeURIComponent('https://go10.dev/nasty/');
+  for (const name of ['X', 'LinkedIn', 'Bluesky', 'Reddit', 'Hacker News', 'Email']) {
+    assert.match(share, new RegExp(`>${name}</a>`));
+  }
+  assert.ok(share.includes(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`));
+  assert.ok(share.includes(`https://x.com/intent/post?text=${encodeURIComponent(nasty.title)}&amp;url=${url}`));
+  assert.ok(share.includes(`mailto:?subject=${encodeURIComponent(nasty.title)}&amp;body=${url}`));
+  assert.ok(!share.includes('<Rig>'));
+  const external = share.match(/<a [^>]*href="https:[^>]*>/g);
+  assert.equal(external.length, 5);
+  for (const tag of external) assert.match(tag, /target="_blank" rel="noopener noreferrer"/);
+});
+
+test('copy and native share buttons start hidden and are revealed by script', () => {
+  const html = renderPost(posts[0]);
+  assert.match(html, /<button type="button" data-native hidden>/);
+  assert.match(html, /<button type="button" data-copy hidden/);
+  assert.match(html, /navigator\.share[\s\S]*navigator\.clipboard/);
+  for (const page of [renderHome(posts), renderAbout('<p>Hi</p>'), renderNotFound()]) {
+    assert.doesNotMatch(page, /class="share"/);
+  }
+});
+
+test('a post with a cover image shows it and uses it for a large link preview', () => {
+  const html = renderPost(post('pic', '2026-10-12', { image: 'cover one.png', imageAlt: 'A "rig" & its <bones>' }));
+  assert.match(html, /<figure class="cover"><img src="cover%20one.png" alt="A &quot;rig&quot; &amp; its &lt;bones&gt;"><\/figure>/);
+  assert.match(html, /<meta property="og:image" content="https:\/\/go10.dev\/pic\/cover%20one.png">/);
+  assert.match(html, /<meta name="twitter:image" content="https:\/\/go10.dev\/pic\/cover%20one.png">/);
+  assert.match(html, /<meta property="og:image:alt" content="A &quot;rig&quot; &amp; its &lt;bones&gt;">/);
+  assert.match(html, /<meta name="twitter:card" content="summary_large_image">/);
+});
+
+test('a post without a cover image keeps the small card and the author photo', () => {
+  const html = renderPost(posts[0]);
+  assert.doesNotMatch(html, /class="cover"/);
+  assert.match(html, /<meta name="twitter:card" content="summary">/);
+  assert.match(html, /<meta property="og:image" content="https:\/\/go10.dev\/assets\/profile.jpg">/);
+});

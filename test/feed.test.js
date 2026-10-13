@@ -79,3 +79,14 @@ test('content containing ]]> does not break the CDATA section', () => {
   assert.equal(sections, '<pre><code>a[b[0]]>c</code></pre>');
   assert.equal(encoded.replace(/<!\[CDATA\[[\s\S]*?\]\]>/g, ''), '');
 });
+
+test('feed items credit the post author with dc:creator', () => {
+  const xml = renderFeed([post('a', '2026-10-12')], SITE_URL);
+  assert.match(xml, /xmlns:dc="http:\/\/purl.org\/dc\/elements\/1.1\/"/);
+  assert.match(items(xml)[0], /<dc:creator>Mateo Jacques<\/dc:creator>/);
+});
+
+test('feed puts the cover image first, with an absolute url', () => {
+  const xml = renderFeed([post('pic', '2026-10-12', { image: 'cover.png', imageAlt: 'A rig' })], SITE_URL);
+  assert.match(items(xml)[0], /<!\[CDATA\[<p><img src="https:\/\/go10.dev\/pic\/cover.png" alt="A rig"><\/p>\n<p>Body pic<\/p>/);
+});

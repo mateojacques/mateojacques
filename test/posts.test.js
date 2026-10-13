@@ -90,3 +90,15 @@ test('throws on slugs that are not lowercase kebab-case', () => {
   }
   assert.equal(loadPosts(tempPosts({ 'usd-101.md': md() })).length, 1);
 });
+
+test('posts default to the main author and accept a known author', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'authors-'));
+  const write = (slug, extra) => fs.writeFileSync(path.join(dir, `${slug}.md`), `---\ntitle: T\ndate: 2026-01-01\nsummary: S\n${extra}---\nBody\n`);
+  write('plain', '');
+  write('explicit', 'author: mateo-jacques\n');
+  const bySlug = Object.fromEntries(loadPosts(dir).map((p) => [p.slug, p.author]));
+  assert.deepEqual(bySlug, { plain: 'mateo-jacques', explicit: 'mateo-jacques' });
+  write('stranger', 'author: nobody\n');
+  assert.throws(() => loadPosts(dir), /stranger\.md: Unknown author "nobody"/);
+  fs.rmSync(dir, { recursive: true });
+});
