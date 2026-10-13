@@ -1,6 +1,6 @@
 # Go10 blog: design
 
-Date: 2026-10-12. Repo: `mateojacques` (to be renamed/re-pointed to Go10 by the owner; not part of this work).
+Date: 2026-10-12. Updated 2026-10-13 to match the shipped code (authors, share links, cover images). Repo: `mateojacques` (to be renamed/re-pointed to Go10 by the owner; not part of this work).
 
 ## Intent
 
@@ -24,7 +24,7 @@ Readers:
 ## Non-goals
 
 - No dark mode, no theme switcher.
-- No comments, search, tags/categories, newsletter, analytics, or pagination for now.
+- No comments, search, tags/categories, newsletter, analytics, or pagination for now. (Share links are allowed, see Additions.)
 - No page loaders or loading animations. Decided: the characters are enough.
 - No art gallery, games, music, or Plazem iframe. The personal multi-topic site is gone.
 - No client-side framework, no bundler, no CMS.
@@ -38,7 +38,7 @@ Readers:
 
 ## Decisions made with the owner
 
-- **Name / domain / tagline:** Go10, go10.dev, "Engineering Animation". (The current README says `go10.blog`; the owner said go10.dev. Treat go10.dev as correct and fix the README.)
+- **Name / domain / tagline:** Go10, go10.dev, "Engineering Animation". (An earlier README said `go10.blog`; go10.dev is correct.)
 - **Hosting:** Netlify, permanently. It builds on every push. Generated HTML is **not** committed; Netlify runs the build command and publishes the output folder (via `netlify.toml`).
 - **Font:** keep Walter Turncoat (hand-drawn). It is the signature of the site.
 - **Colours:** text `#111`, secondary `#333`/`#666`, white background. Same as current.
@@ -53,7 +53,7 @@ Readers:
 ## Calls made by the designer (the owner has not weighed in; flag if wrong)
 
 - **Tooling:** a small Node build script (`build.js`), Markdown via a single dependency such as `marked`, front matter parsed by a few lines of code. No static-site framework. Node is already installed on the owner's machine (v26).
-- **Post format:** `posts/<slug>.md` with front matter: `title`, `date` (YYYY-MM-DD), `summary`, optional `draft: true` (excluded from the build). URL: `/<slug>/`.
+- **Post format:** `posts/<slug>.md` with front matter: `title`, `date` (YYYY-MM-DD), `summary`, optional `draft: true` (excluded from the build), plus the optional `author`, `image` and `imageAlt` fields described in Additions. URL: `/<slug>/`.
 - **Randomness without hurting no-JS or layout:** the build assigns each post a deterministic default character (e.g. by hashing the slug) and writes it into the HTML with explicit width/height. A tiny inline script (about 5 lines) swaps it for a random one on load. Without JavaScript the page still works and shows the default.
 - **Character images:** despite their folder name, the "thumbnails" are full-size (up to 1696x2016, 4.7 MB total for the 15). Most are transparent PNGs; #8, #9 and #26 are palette PNGs. Aspect ratios vary from portrait to 16:9. Call: each picture sits in a fixed 64x64 box, scaled to fit and centered (`object-fit: contain`), so any ratio works with no layout shift. Produce 128px-long-edge optimized copies (PNG with transparency preserved, or WebP) with a **one-off conversion script** whose output is committed (no native image dependency on Netlify). Remove the originals once converted; the 15 originals remain in git history.
 - **Distinct characters per page:** on the home page, rows get different characters (shuffle, no repeats) until there are more posts than characters, then repeat. A post page shows one random character as its sign-off.
@@ -64,7 +64,7 @@ Readers:
 - **About page:** `about.md` rendered with the same template. The builder writes a short placeholder the owner will replace. It should include space for who the owner is, a line about wanting to work in animation pipelines, and links (GitHub, LinkedIn, email), which the owner supplies.
 - **RSS:** `/feed.xml` with full post content, generated at build time.
 - **Fonts:** self-host Walter Turncoat (latin subset, woff2, SIL OFL license) instead of Google Fonts; use `font-display: swap`.
-- **Metadata:** `<title>`, meta description, canonical URL on go10.dev, Open Graph and Twitter tags (text only; no per-post images), `lang="en"`, a favicon taken from one of the characters, `<meta name="color-scheme" content="light">`.
+- **Metadata:** `<title>`, meta description, canonical URL on go10.dev, Open Graph and Twitter tags (a post's cover image is the preview when it has one, otherwise a small text card), `lang="en"`, a favicon taken from one of the characters, `<meta name="color-scheme" content="light">`.
 - **Sample content:** include one example post (`draft: false`, clearly an example) so the site is not empty, and so the owner can see the format. The owner will replace it with real writing.
 - **Repo hygiene:** add `.gitignore` for `dist/`, `node_modules/`, `.superpowers/`. Update README to describe the blog and how to add a post.
 - **Accessibility:** decorative characters use empty `alt=""`; visible focus styles on links; contrast at least AA; works at phone width (single column, 16px gutters).
@@ -83,3 +83,12 @@ Readers:
 - Project file layout, the Markdown library, the image optimization method.
 - The wording of the placeholder About text and the example post.
 - Whether to add a tiny local preview/watch command (`npm run dev`).
+
+## Additions after the first release
+
+Shipped in `feat: add post authors, share links and cover images`. They extend the design without changing its goals: still static, no tracking, no third-party requests at runtime.
+
+- **Authors.** `lib/authors.js` is a registry of people who can sign a post (name, avatar, link). A post sets `author: <id>` in front matter and defaults to `mateo-jacques`, so older posts need no change. An unknown id fails the build. The post page shows a byline with the author's avatar, name (linked to `/about/`, `rel="author"`) and date. The feed emits `dc:creator`.
+- **Share links.** Each post page has plain links to X, LinkedIn, Bluesky, Reddit, Hacker News and email, carrying only the title and canonical URL. They work without JavaScript. "Share..." (the device's native share sheet) and "Copy link" stay hidden until a small inline script confirms the browser supports them. No SDKs, no trackers.
+- **Cover images.** Optional `image` (a file name) and `imageAlt` (required with it, for screen readers) in front matter. The image must be a file in the post's own folder (`<slug>/index.md`), never a URL, so the build stays offline. `node scripts/add-image.js <slug> <path-or-url> --alt "..."` fetches or copies it, checks the type from the file's bytes (PNG, JPEG, WebP, GIF, AVIF; never SVG), caps it at 5 MB, converts a flat post into a folder post if needed, and writes the front matter. The cover shows on the post page, as the first item in the feed entry, and as the Open Graph / Twitter preview with a large card.
+- **Documentation.** `CLAUDE.md` and `docs/architecture.md`, `docs/development.md`, `docs/writing-posts.md` describe the shipped system; where this spec and the code disagree, the code wins.
