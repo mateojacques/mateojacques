@@ -47,8 +47,10 @@ test('writes index, post, about, 404 and feed files', async () => {
 });
 
 test('copies static assets to the output root', async () => {
-  const { outDir } = await builtSite();
-  assert.equal(read(outDir, 'styles.css'), 'body { color: #111; }\n');
+  const { root, outDir } = await builtSite();
+  // Compare with the source rather than a literal: git may check it out with CRLF.
+  assert.equal(read(outDir, 'styles.css'), fs.readFileSync(path.join(root, 'static', 'styles.css'), 'utf8'));
+  assert.match(read(outDir, 'styles.css'), /body \{ color: #111; \}/);
   assert.ok(fs.existsSync(path.join(outDir, 'characters', 'README.txt')));
 });
 
