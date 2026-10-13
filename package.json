@@ -1,0 +1,17 @@
+{
+  "name": "go10",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Go10: Engineering Animation. A static blog at go10.dev.",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node build.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "marked": "^18.1.1"
+  }
+}
