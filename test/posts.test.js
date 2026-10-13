@@ -1,5 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadPosts } from '../lib/posts.js';
@@ -55,4 +57,36 @@ test('throws on an impossible date like 2026-02-31', () => {
 test('returns [] for an empty or missing posts directory', () => {
   assert.deepEqual(loadPosts(path.join(fixtures, 'empty')), []);
   assert.deepEqual(loadPosts(path.join(fixtures, 'does-not-exist')), []);
+});
+
+// A temp posts dir holding the given { relativePath: source } files.
+function tempPosts(files) {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'go10-posts-'));
+  for (const [rel, source] of Object.entries(files)) {
+    fs.mkdirSync(path.dirname(path.join(dir, rel)), { recursive: true });
+    fs.writeFileSync(path.join(dir, rel), source);
+  }
+  return dir;
+}
+const md = (extra = '') => `---\ntitle: T\ndate: 2026-01-01\nsummary: S\n${extra}---\nBody\n`;
+
+test('throws when draft is not exactly true or false', () => {
+  for (const value of ['True', 'yes', '"true"', '1']) {
+    const dir = tempPosts({ 'odd-draft.md': md(`draft: ${value}\n`) });
+    assert.throws(() => loadPosts(dir), /odd-draft\.md.*draft/, value);
+  }
+  assert.equal(loadPosts(tempPosts({ 'ok.md': md('draft: false\n') })).length, 1);
+});
+
+test('throws naming both files when a file post and a folder post share a slug', () => {
+  const dir = tempPosts({ 'pics.md': md(), 'pics/index.md': md() });
+  assert.throws(() => loadPosts(dir), (err) => /pics\.md/.test(err.message) && /index\.md/.test(err.message));
+});
+
+test('throws on slugs that are not lowercase kebab-case', () => {
+  for (const name of ['r&d.md', 'Has Space.md', 'About.md', 'under_score.md']) {
+    const dir = tempPosts({ [name]: md() });
+    assert.throws(() => loadPosts(dir), (err) => err.message.includes(name) && /slug/.test(err.message), name);
+  }
+  assert.equal(loadPosts(tempPosts({ 'usd-101.md': md() })).length, 1);
 });

@@ -17,7 +17,8 @@ The post, in Markdown.
 ```
 
 - `title`, `date` (YYYY-MM-DD) and `summary` are required. The build fails and names the file if one is missing.
-- Add `draft: true` to keep a post out of the site and the feed.
+- File and folder names must be lowercase letters, digits and hyphens (`usd-for-web-devs`).
+- Add `draft: true` to keep a post out of the site and the feed (`true` or `false` only).
 - If a post has images, make it a folder instead: `content/posts/render-farms/index.md` with the images next to it, linked relatively (`![Farm diagram](farm.png)`).
 
 The About page is `content/about.md`.
