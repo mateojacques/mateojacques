@@ -1,1 +1,1 @@
-Software Engineer in love with the art of animation. I write about it on [go10.dev](https://go10.dev).
+Software Engineer. [go10.dev](https://go10.dev).
