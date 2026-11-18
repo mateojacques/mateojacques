@@ -1,14 +1,20 @@
-<a href="https://go10.dev"><img src=".github/readme/hello.webp" alt="Mateo's cartoon head, in a gold ring, says: Hi, I'm Mateo! I design and build fast, careful websites and products for small teams. Each capsule below is a client I've worked with. Pull a thread and I'll walk you through how it went." /></a>
+<a href="https://go10.dev"><img src=".github/readme/hello.webp" alt="Mateo's cartoon head, in a gold ring, says: Hi, I'm Mateo! I'm a software engineer at Unbox. On the side, I build fast, careful websites and products for small teams." /></a>
 
-<a href="https://go10.dev/work/propiedades-el-31/"><img src=".github/readme/propiedades-el-31.webp" alt="Propiedades El 31, real estate, 2025. Every listing on the map: the back office, the API and the public site of a Buenos Aires real estate agency, built and run by one developer since 2025. 3 apps on one data model, 135 partidos searchable by distance, in production since 2025." /></a>
+### Experience
 
-<a href="https://go10.dev/work/libreria-san-pablo/"><img src=".github/readme/libreria-san-pablo.webp" alt="Librería San Pablo, B2B e-commerce, 2026. 23,040 rows of FoxPro: an online store for schools and companies, fed every week by the shop's own Visual FoxPro stock table. 6,053 products live, 1 file to upload each week." /></a>
+- <img src=".github/readme/unbox.png" width="18" align="top" alt="" /> **Software Engineer** at **[Unbox](https://www.unbox.social/)** · Jan 2026 – present
+- <img src=".github/readme/avenida.png" width="18" align="top" alt="" /> **Full Stack Developer** at **[Avenida+](https://avenidamas.com/)** · 2022 – 2026
 
-<a href="https://go10.dev/work/abuelos-burger/"><img src=".github/readme/abuelos-burger.webp" alt="Abuelos Burger, restaurant site, 2026. From the menu to a complete WhatsApp order: customers build their order on the page and send it to the kitchen as one complete WhatsApp message. 3 steps from dish to sent order, 0 servers holding customer data." /></a>
+### Client work
 
-<a href="https://go10.dev/work/fp-jacques/"><img src=".github/readme/fp-jacques.webp" alt="FP Jacques, e-commerce, 2026. A store in a day: a sports nutrition store forked from San Pablo's platform. 1 day from fork to production, 7,774 lines of API code removed, 25 products." /></a>
+Side projects for small businesses. Full case studies at [go10.dev](https://go10.dev).
 
-<a href="mailto:contacto@go10.dev"><img src=".github/readme/contact.webp" alt="Mateo says: Have a project in mind? I'm available right now. Write to me at contacto@go10.dev, or see every case study at go10.dev." /></a>
+| Project | Scope | Results |
+| --- | --- | --- |
+| <img src=".github/readme/propiedades-el-31.png" width="36" alt="" /><br>**[Propiedades El 31](https://go10.dev/work/propiedades-el-31/)**<br><sub>Real estate · 2025</sub> | Back office, API and public site for a Buenos Aires agency. Sole developer, design to deploy. | **3** apps on one data model<br>**135** partidos searchable by distance<br>In production since 2025 |
+| <img src=".github/readme/libreria-san-pablo.png" width="36" alt="" /><br>**[Librería San Pablo](https://go10.dev/work/libreria-san-pablo/)**<br><sub>B2B e-commerce · 2026</sub> | B2B store, back office and API, fed weekly from the shop's Visual FoxPro stock table. Sole developer. | **23,040** FoxPro rows imported<br>**6,053** products live<br>**1** file to upload each week |
+| <img src=".github/readme/abuelos-burger.png" width="36" alt="" /><br>**[Abuelos Burger](https://go10.dev/work/abuelos-burger/)**<br><sub>Restaurant site · 2026</sub> | Menu site where customers build an order and send it as one WhatsApp message. Front-end and ordering flow. | **3** steps from dish to sent order<br>**0** servers holding customer data<br>**7** burgers with real photos |
+| <img src=".github/readme/fp-jacques.png" width="36" alt="" /><br>**[FP Jacques](https://go10.dev/work/fp-jacques/)**<br><sub>E-commerce · 2026</sub> | Sports nutrition store, forked from San Pablo's platform and trimmed down. Sole developer. | **1** day from fork to production<br>**7,774** lines of API code removed<br>**25** products, managed by hand |
 
 <p align="center">
   <a href="mailto:contacto@go10.dev">contacto@go10.dev</a> · <a href="https://go10.dev">go10.dev</a> · <a href="https://www.linkedin.com/in/mateoleonjacques">LinkedIn</a>
